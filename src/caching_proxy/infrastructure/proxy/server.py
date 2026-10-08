@@ -12,6 +12,14 @@ class ProxyRequestHandler(BaseHTTPRequestHandler):
 
     server: Any  # has server.forwarder
 
+    def __init__(
+        self,
+        request: Any,
+        client_address: Any,
+        server: ThreadingHTTPServer,
+    ) -> None:
+        super().__init__(request, client_address, server)
+
     def log_message(self, *args: Any, **kwargs: Any) -> None:
         """Suppress default stderr logging; handled by session or silent."""
 
