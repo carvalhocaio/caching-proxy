@@ -38,30 +38,20 @@ class ProxyRequestHandler(BaseHTTPRequestHandler):
         except OriginConnectionError as err:
             self.send_error(502, f"Bad Gateway: {err}")
 
-    def do_GET(self) -> None:
-        self._dispatch_proxy("GET")
+    def _handle_request(self) -> None:
+        self._dispatch_proxy(self.command)
 
-    def do_POST(self) -> None:
-        self._dispatch_proxy("POST")
-
-    def do_PUT(self) -> None:
-        self._dispatch_proxy("PUT")
-
-    def do_DELETE(self) -> None:
-        self._dispatch_proxy("DELETE")
-
-    def do_PATCH(self) -> None:
-        self._dispatch_proxy("PATCH")
-
-    def do_HEAD(self) -> None:
-        self._dispatch_proxy("HEAD")
-
-    def do_OPTIONS(self) -> None:
-        self._dispatch_proxy("OPTIONS")
+    do_GET = _handle_request
+    do_POST = _handle_request
+    do_PUT = _handle_request
+    do_DELETE = _handle_request
+    do_PATCH = _handle_request
+    do_HEAD = _handle_request
+    do_OPTIONS = _handle_request
 
 
 class CachingProxyServer(ThreadingHTTPServer):
-    """Multi-threaded HTTP Server for caching proxy."""
+    """Multithreaded HTTP Server for caching proxy."""
 
     def __init__(
         self,
