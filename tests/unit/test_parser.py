@@ -5,11 +5,11 @@ from caching_proxy.infrastructure.cli.parser import CLIArgs, parse_args
 
 
 def test_parse_args_server_mode():
-    args = parse_args(["--port", "3000", "--origin", "http://dummyjson.com"])
+    args = parse_args(["--port", "3000", "--origin", "https://dummyjson.com"])
     assert args == CLIArgs(
         clear_cache=False,
         port=3000,
-        origin="http://dummyjson.com",
+        origin="https://dummyjson.com",
     )
 
 
@@ -34,15 +34,15 @@ def test_parse_args_missing_origin():
 
 def test_parse_args_missing_port():
     with pytest.raises(UsageError, match="--port is required"):
-        parse_args(["--origin", "http://dummyjson.com"])
+        parse_args(["--origin", "https://dummyjson.com"])
 
 
 def test_parse_args_invalid_port():
     with pytest.raises(UsageError, match="Port must be between 1 and 65535"):
-        parse_args(["--port", "0", "--origin", "http://dummyjson.com"])
+        parse_args(["--port", "0", "--origin", "https://dummyjson.com"])
 
     with pytest.raises(UsageError, match="Port must be between 1 and 65535"):
-        parse_args(["--port", "70000", "--origin", "http://dummyjson.com"])
+        parse_args(["--port", "70000", "--origin", "https://dummyjson.com"])
 
 
 def test_parse_args_invalid_origin_url():

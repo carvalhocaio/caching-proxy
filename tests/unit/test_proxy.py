@@ -26,7 +26,7 @@ def test_proxy_forwarder_cache_miss():
     cache = FakeCacheStore()
 
     def handler(request: httpx.Request) -> httpx.Response:
-        assert request.url == "http://dummyjson.com/products"
+        assert request.url == "https://dummyjson.com/products"
         return httpx.Response(
             200,
             headers={"content-type": "application/json"},
@@ -35,7 +35,7 @@ def test_proxy_forwarder_cache_miss():
 
     client = httpx.Client(transport=httpx.MockTransport(handler))
     forwarder = ProxyForwarder(
-        origin="http://dummyjson.com",
+        origin="https://dummyjson.com",
         cache=cache,
         client=client,
     )
@@ -70,7 +70,7 @@ def test_proxy_forwarder_cache_hit():
     )
 
     forwarder = ProxyForwarder(
-        origin="http://dummyjson.com",
+        origin="https://dummyjson.com",
         cache=cache,
         client=httpx.Client(),  # No requests should be made
     )
@@ -96,7 +96,7 @@ def test_proxy_forwarder_post_not_cached():
 
     client = httpx.Client(transport=httpx.MockTransport(handler))
     forwarder = ProxyForwarder(
-        origin="http://dummyjson.com",
+        origin="https://dummyjson.com",
         cache=cache,
         client=client,
     )
@@ -122,7 +122,7 @@ def test_proxy_forwarder_connection_error():
 
     client = httpx.Client(transport=httpx.MockTransport(handler))
     forwarder = ProxyForwarder(
-        origin="http://dummyjson.com",
+        origin="https://dummyjson.com",
         cache=cache,
         client=client,
     )

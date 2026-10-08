@@ -73,10 +73,10 @@ def test_session_server_start_and_keyboard_interrupt():
         server_factory=server_factory,
     )
 
-    code = session.run(["--port", "3000", "--origin", "http://dummyjson.com"])
+    code = session.run(["--port", "3000", "--origin", "https://dummyjson.com"])
     assert code == 0
     assert "Starting caching proxy on port 3000" in stdout_io.getvalue()
-    assert "forwarding to http://dummyjson.com" in stdout_io.getvalue()
+    assert "forwarding to https://dummyjson.com" in stdout_io.getvalue()
     assert "Proxy server stopped" in stdout_io.getvalue()
     mock_server.server_close.assert_called_once()
 
@@ -97,7 +97,7 @@ def test_session_unexpected_error():
         server_factory=server_factory,
     )
 
-    code = session.run(["--port", "3000", "--origin", "http://dummyjson.com"])
+    code = session.run(["--port", "3000", "--origin", "https://dummyjson.com"])
     assert code == 4
     assert "Unexpected error" in stderr_io.getvalue()
 
