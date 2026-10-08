@@ -39,7 +39,7 @@ def running_test_server(
     )
 
     server = CachingProxyServer(("127.0.0.1", 0), forwarder=forwarder)
-    port = server.server_address[1]
+    port = int(server.server_address[1])
 
     server_thread = threading.Thread(target=server.serve_forever, daemon=True)
     server_thread.start()
