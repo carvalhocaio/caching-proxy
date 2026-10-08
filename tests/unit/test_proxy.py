@@ -7,16 +7,16 @@ from caching_proxy.infrastructure.proxy.forwarder import ProxyForwarder
 
 
 class FakeCacheStore:
-    def __init__(self):
-        self.store = {}
+    def __init__(self) -> None:
+        self.store: dict[str, CachedResponse] = {}
 
-    def get(self, key: str):
+    def get(self, key: str) -> CachedResponse | None:
         return self.store.get(key)
 
-    def set(self, key: str, response: CachedResponse):
+    def set(self, key: str, response: CachedResponse) -> None:
         self.store[key] = response
 
-    def clear(self):
+    def clear(self) -> int:
         count = len(self.store)
         self.store.clear()
         return count
