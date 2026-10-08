@@ -14,7 +14,7 @@ from caching_proxy.infrastructure.proxy.server import CachingProxyServer
 
 
 def default_server_factory(port: int, forwarder: ProxyForwarder) -> CachingProxyServer:
-    """Create default ThreadingHTTPServer instance."""
+    """Create the default ThreadingHTTPServer instance."""
     return CachingProxyServer(("0.0.0.0", port), forwarder=forwarder)
 
 
