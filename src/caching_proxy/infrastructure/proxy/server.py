@@ -12,7 +12,7 @@ class ProxyRequestHandler(BaseHTTPRequestHandler):
 
     server: Any  # has server.forwarder
 
-    def log_message(self, format: str, *args: Any) -> None:
+    def log_message(self, *args: Any, **kwargs: Any) -> None:
         """Suppress default stderr logging; handled by session or silent."""
 
     def _dispatch_proxy(self, method: str) -> None:
