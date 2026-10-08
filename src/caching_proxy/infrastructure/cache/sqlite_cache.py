@@ -75,7 +75,7 @@ class SQLiteCache:
             )
 
     def clear(self) -> int:
-        """Clear all cached responses and return count of deleted items."""
+        """Clear all cached responses and return a count of deleted items."""
         with self._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT COUNT(*) FROM responses")
