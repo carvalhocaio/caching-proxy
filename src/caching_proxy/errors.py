@@ -10,7 +10,7 @@ class UsageError(CachingProxyError):
 
 
 class OriginConnectionError(CachingProxyError):
-    """Raised when proxy fails to connect to the origin server."""
+    """Raised when the proxy fails to connect to the origin server."""
 
 
 class CacheError(CachingProxyError):
