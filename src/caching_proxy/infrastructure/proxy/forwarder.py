@@ -32,7 +32,7 @@ class ProxyResponse:
 
 
 class ProxyForwarder:
-    """Forwards incoming HTTP requests to origin server with caching."""
+    """Forwards incoming HTTP requests to the origin server with caching."""
 
     def __init__(
         self,
