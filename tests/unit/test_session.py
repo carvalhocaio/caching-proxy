@@ -9,18 +9,20 @@ from caching_proxy.infrastructure.cli.session import Session
 
 
 class FakeCacheStore:
-    def __init__(self):
-        self.count = 5
+    def __init__(self, count: int = 5) -> None:
+        self.count = count
+        self._store: dict[str, CachedResponse] = {}
 
-    def get(self, key: str):
-        return None
+    def get(self, key: str) -> CachedResponse | None:
+        return self._store.get(key)
 
-    def set(self, key: str, response: CachedResponse):
-        pass
+    def set(self, key: str, response: CachedResponse) -> None:
+        self._store[key] = response
 
-    def clear(self):
-        cleared = self.count
+    def clear(self) -> int:
+        cleared = self.count + len(self._store)
         self.count = 0
+        self._store.clear()
         return cleared
 
 
